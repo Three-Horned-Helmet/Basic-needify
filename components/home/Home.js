@@ -6,6 +6,12 @@ const Home = () => {
     drink: false,
     sleep: false,
     air: false,
+    walk: false,
+    tidyRoom: false,
+    shower: false,
+    food: false,
+    cleanClothes: false,
+    Stretch: false,
   });
 
   const handlePress = (key) => {
@@ -28,26 +34,20 @@ const Home = () => {
     );
   });
 
-  /* const renderChores = [];
-  for (let key in chore) {
-    renderChores.push(
-      <TouchableOpacity
-        key={key}
-        onPress={() => {
-          handlePress(key);
-        }}
-      >
-        <Text style={chore[key] ? styles.done : styles.needToDo}>{key}</Text>
-      </TouchableOpacity>
-    );
-  } */
-
-  return <View>{renderChores}</View>;
+  return <View style={styles.container}>{renderChores}</View>;
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 30,
+  },
+  choreText: {
+    textAlign: "center",
+    fontSize: 20,
+  },
   needToDo: {
     color: "red",
   },
