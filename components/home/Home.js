@@ -29,7 +29,7 @@ const Home = () => {
           handlePress(c);
         }}
       >
-        <Text style={c ? styles.done : styles.needToDo}>{c}</Text>
+        <Text style={chore[c] ? styles.done : styles.needToDo}>{c}</Text>
       </TouchableOpacity>
     );
   });
