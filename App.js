@@ -17,13 +17,13 @@ const RootStack = createStackNavigator(
 const AppContainer = createAppContainer(RootStack);
 
 export default function App() {
-  return <AppContainer></AppContainer>;
+  return <AppContainer style={styles.container}></AppContainer>;
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#222",
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
