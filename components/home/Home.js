@@ -79,6 +79,7 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
+      <Text>{today}</Text>
       <View>{renderChores}</View>
       <View>
         <FireworksGif />
