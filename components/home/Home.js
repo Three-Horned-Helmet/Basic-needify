@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import FireworksGif from "./fireworks/FireworksGif";
 
 const Home = () => {
   const [chore, setChore] = useState({
@@ -21,8 +22,6 @@ const Home = () => {
     });
   };
 
-
-
   const renderChores = [];
   let currentDate = new Date();
   let day = currentDate.getDate();
@@ -30,10 +29,12 @@ const Home = () => {
   let year = currentDate.getFullYear();
 
   const createDate = () => {
-    return( 
-      <div>{day} / {month} / {year}</div>
-     )
-  }
+    return (
+      <Text>
+        {day} / {month} / {year}
+      </Text>
+    );
+  };
 
   for (let key in chore) {
     renderChores.push(
@@ -55,7 +56,12 @@ const Home = () => {
   return (
     <View style={styles.container}>
       {createDate()}
-      {renderChores}</View>)
+      {renderChores}
+      <View>
+        <FireworksGif />
+      </View>
+    </View>
+  );
 };
 
 export default Home;
