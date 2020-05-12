@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import Moment from 'react-moment';
+import CheckBox from 'react-native-check-box';
+
 
 const Home = () => {
   const [chore, setChore] = useState({
@@ -49,12 +50,18 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <div style={{textAlign: "center"}}>{today}</div>
-    
-    <View style={styles.container}>
-      {renderChores}</View>)
-      </div>
+      <View style={styles.container}>
+        <View>
+        {renderChores}
+        <CheckBox 
+              leftText={"Drink"}
+              onClick = { () => {
+                console.log("Pressed");
+              }}
+              isChecked={chore.Drink}
+        />
+        </View>
+      </View>
   )
 };
 
@@ -63,11 +70,12 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
-  },
+    marginTop: 30
+    },
   choreText: {
     textAlign: "center",
-    fontSize: 20,
+    flexDirection: "column",
+    fontSize: 20
   },
   needToDo: {
     color: "red",
