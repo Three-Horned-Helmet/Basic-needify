@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import FireworksGif from "./fireworks/FireworksGif";
+import CheckBox from "react-native-check-box";
 
 const Home = () => {
   const [chore, setChore] = useState({
@@ -8,10 +9,10 @@ const Home = () => {
     Sleep: false,
     Air: false,
     Walk: false,
-    "Tidy Room": false,
+    "Tidy room": false,
     Shower: false,
     Food: false,
-    "Clean Clothes": false,
+    "Clean clothes": false,
     Stretch: false,
   });
 
@@ -24,17 +25,7 @@ const Home = () => {
 
   const renderChores = [];
   let currentDate = new Date();
-  let day = currentDate.getDate();
-  let month = currentDate.getMonth();
-  let year = currentDate.getFullYear();
-
-  const createDate = () => {
-    return (
-      <Text>
-        {day} / {month} / {year}
-      </Text>
-    );
-  };
+  let today = currentDate.toDateString();
 
   for (let key in chore) {
     renderChores.push(
@@ -49,14 +40,14 @@ const Home = () => {
         >
           {key}
         </Text>
+        <CheckBox onClick={() => {}} isChecked={chore[key]} />
       </TouchableOpacity>
     );
   }
 
   return (
     <View style={styles.container}>
-      {createDate()}
-      {renderChores}
+      <View>{renderChores}</View>
       <View>
         <FireworksGif />
       </View>
@@ -73,6 +64,7 @@ const styles = StyleSheet.create({
   },
   choreText: {
     textAlign: "center",
+    flexDirection: "column",
     fontSize: 20,
   },
   needToDo: {
