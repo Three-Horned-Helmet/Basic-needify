@@ -8,10 +8,10 @@ const Home = () => {
     Sleep: false,
     Air: false,
     Walk: false,
-    "Tidy Room": false,
+    "Tidy room": false,
     Shower: false,
     Food: false,
-    "Clean Clothes": false,
+    "Clean clothes": false,
     Stretch: false,
   });
 
