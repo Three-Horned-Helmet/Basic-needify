@@ -21,20 +21,41 @@ const Home = () => {
     });
   };
 
-  const renderChores = Object.keys(chore).map((c, i) => {
-    return (
+
+
+  const renderChores = [];
+  let currentDate = new Date();
+  let day = currentDate.getDate();
+  let month = currentDate.getMonth();
+  let year = currentDate.getFullYear();
+
+  const createDate = () => {
+    return( 
+      <div>{day} / {month} / {year}</div>
+     )
+  }
+
+  for (let key in chore) {
+    renderChores.push(
       <TouchableOpacity
-        key={i}
+        key={key}
         onPress={() => {
-          handlePress(c);
+          handlePress(key);
         }}
       >
-        <Text style={chore[c] ? styles.done : styles.needToDo}>{c}</Text>
+        <Text
+          style={[chore[key] ? styles.done : styles.needToDo, styles.choreText]}
+        >
+          {key}
+        </Text>
       </TouchableOpacity>
     );
-  });
+  }
 
-  return <View style={styles.container}>{renderChores}</View>;
+  return (
+    <View style={styles.container}>
+      {createDate()}
+      {renderChores}</View>)
 };
 
 export default Home;
