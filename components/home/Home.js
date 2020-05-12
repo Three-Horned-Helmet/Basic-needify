@@ -5,25 +5,25 @@ import CheckBox from "react-native-check-box";
 
 const Home = () => {
   const [chore, setChore] = useState({
-    Drink: false,
-    Sleep: false,
-    Air: false,
-    Walk: false,
-    "Tidy room": false,
-    Shower: false,
-    Food: false,
-    "Clean clothes": false,
-    Stretch: false,
+    Drink: { state: false, prio: 1 },
+    Sleep: { state: false, prio: 2 },
+    Air: { state: false, prio: 3 },
+    Walk: { state: false, prio: 4 },
+    "Tidy room": { state: false, prio: 5 },
+    Shower: { state: false, prio: 6 },
+    Food: { state: false, prio: 7 },
+    "Clean clothes": { state: false, prio: 8 },
+    Stretch: { state: false, prio: 9 },
   });
   const [statusImage, setStatusImage] = useState({
     mood: require("../../assets/statusImages/0.png"),
   });
 
   const handlePress = (key) => {
-    changeStatusImage(chore[key]);
+    changeStatusImage(chore[key].state);
     setChore({
       ...chore,
-      [key]: !chore[key],
+      [key]: { ...chore[key], state: !chore[key].state },
     });
   };
   const changeStatusImage = (chore) => {
@@ -55,27 +55,31 @@ const Home = () => {
     }, 2000);
   };
 
-  const renderChores = [];
   let currentDate = new Date();
   let today = currentDate.toDateString();
 
-  for (let key in chore) {
-    renderChores.push(
-      <TouchableOpacity
-        key={key}
-        onPress={() => {
-          handlePress(key);
-        }}
-      >
-        <Text
-          style={[chore[key] ? styles.done : styles.needToDo, styles.choreText]}
+  const renderChores = Object.keys(chore)
+    .sort((a, b) => chore[a].prio - chore[b].prio)
+    .map((ele) => {
+      return (
+        <TouchableOpacity
+          key={ele}
+          onPress={() => {
+            handlePress(ele);
+          }}
         >
-          {key}
-        </Text>
-        <CheckBox onClick={() => {}} isChecked={chore[key]} />
-      </TouchableOpacity>
-    );
-  }
+          <Text
+            style={[
+              chore[ele].state ? styles.done : styles.needToDo,
+              styles.choreText,
+            ]}
+          >
+            {ele}
+          </Text>
+          <CheckBox onClick={() => {}} isChecked={chore[ele].state} />
+        </TouchableOpacity>
+      );
+    });
 
   return (
     <View style={styles.container}>
