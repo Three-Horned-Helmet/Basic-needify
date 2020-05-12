@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const Home = () => {
   const [chore, setChore] = useState({
-    drink: false,
-    sleep: false,
-    air: false,
-    walk: false,
-    "tidy Room": false,
-    shower: false,
-    food: false,
-    "clean Clothes": false,
+    Drink: false,
+    Sleep: false,
+    Air: false,
+    Walk: false,
+    "Tidy Room": false,
+    Shower: false,
+    Food: false,
+    "Clean Clothes": false,
     Stretch: false,
   });
 
