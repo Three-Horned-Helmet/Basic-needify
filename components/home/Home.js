@@ -56,7 +56,7 @@ const Home = () => {
         <CheckBox 
               leftText={"Drink"}
               onClick = { () => {
-                console.log("Pressed");
+                setChore({Drink: !chore.Drink})
               }}
               isChecked={chore.Drink}
         />
