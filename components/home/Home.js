@@ -6,7 +6,6 @@ const Home = () => {
     drink: false,
     sleep: false,
     air: false,
-    walk: false,
   });
 
   const handlePress = (key) => {
@@ -16,7 +15,20 @@ const Home = () => {
     });
   };
 
-  const renderChores = [];
+  const renderChores = Object.keys(chore).map((c, i) => {
+    return (
+      <TouchableOpacity
+        key={i}
+        onPress={() => {
+          handlePress(key);
+        }}
+      >
+        <Text style={c ? styles.done : styles.needToDo}>{c}</Text>
+      </TouchableOpacity>
+    );
+  });
+
+  /* const renderChores = [];
   for (let key in chore) {
     renderChores.push(
       <TouchableOpacity
@@ -25,30 +37,21 @@ const Home = () => {
           handlePress(key);
         }}
       >
-        <Text style={chore[key] ? styles.done : styles.needToDo}>
-          {key[0].toLocaleUpperCase() + key.slice(1)}
-        </Text>
+        <Text style={chore[key] ? styles.done : styles.needToDo}>{key}</Text>
       </TouchableOpacity>
     );
-  }
-  return <View style={styles.container}>{renderChores}</View>;
+  } */
+
+  return <View>{renderChores}</View>;
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-    textAlign: "center",
-  },
   needToDo: {
     color: "red",
-    fontSize: 20,
   },
   done: {
     color: "green",
-    fontSize: 20,
   },
 });
