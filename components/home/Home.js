@@ -50,7 +50,7 @@ const Home = () => {
 
   return (
     <div>
-      <div>{today}</div>
+      <div style={{textAlign: "center"}}>{today}</div>
     
     <View style={styles.container}>
       {renderChores}</View>)
