@@ -39,16 +39,16 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
-    textAlign: "center",
+    marginTop: 30,
   },
   needToDo: {
     color: "red",
     fontSize: 20,
+    textAlign: "center",
   },
   done: {
     color: "green",
     fontSize: 20,
+    textAlign: "center",
   },
 });
