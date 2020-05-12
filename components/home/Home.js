@@ -24,7 +24,9 @@ const Home = () => {
           handlePress(key);
         }}
       >
-        <Text style={chore[key] ? styles.done : styles.needToDo}>{key}</Text>
+        <Text style={chore[key] ? styles.done : styles.needToDo}>
+          {key[0].toLocaleUpperCase() + key.slice(1)}
+        </Text>
       </TouchableOpacity>
     );
   }
