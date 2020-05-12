@@ -7,6 +7,11 @@ const Home = () => {
     sleep: false,
     air: false,
     walk: false,
+    tidyRoom: false,
+    shower: false,
+    food: false,
+    cleanClothes: false,
+    Stretch: false,
   });
 
   const handlePress = (key) => {
@@ -17,6 +22,7 @@ const Home = () => {
   };
 
   const renderChores = [];
+
   for (let key in chore) {
     renderChores.push(
       <TouchableOpacity
@@ -25,12 +31,15 @@ const Home = () => {
           handlePress(key);
         }}
       >
-        <Text style={chore[key] ? styles.done : styles.needToDo}>
+        <Text
+          style={[chore[key] ? styles.done : styles.needToDo, styles.choreText]}
+        >
           {key[0].toLocaleUpperCase() + key.slice(1)}
         </Text>
       </TouchableOpacity>
     );
   }
+
   return <View style={styles.container}>{renderChores}</View>;
 };
 
@@ -41,14 +50,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 30,
   },
+  choreText: {
+    textAlign: "center",
+    fontSize: 20,
+  },
   needToDo: {
     color: "red",
-    fontSize: 20,
-    textAlign: "center",
   },
   done: {
     color: "green",
-    fontSize: 20,
-    textAlign: "center",
   },
 });
