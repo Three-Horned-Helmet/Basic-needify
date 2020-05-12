@@ -6,6 +6,7 @@ const Home = () => {
     drink: false,
     sleep: false,
     air: false,
+    walk: false,
   });
 
   const handlePress = (key) => {
@@ -30,16 +31,24 @@ const Home = () => {
       </TouchableOpacity>
     );
   }
-  return <View>{renderChores}</View>;
+  return <View style={styles.container}>{renderChores}</View>;
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignContent: "center",
+    textAlign: "center",
+  },
   needToDo: {
     color: "red",
+    fontSize: 20,
   },
   done: {
     color: "green",
+    fontSize: 20,
   },
 });
