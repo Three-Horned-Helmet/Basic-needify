@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import Moment from 'react-moment';
 
 const Home = () => {
   const [chore, setChore] = useState({
@@ -25,15 +26,10 @@ const Home = () => {
 
   const renderChores = [];
   let currentDate = new Date();
-  let day = currentDate.getDate();
-  let month = currentDate.getMonth();
-  let year = currentDate.getFullYear();
+  let today = currentDate.toDateString();
 
-  const createDate = () => {
-    return( 
-      <div>{day} / {month} / {year}</div>
-     )
-  }
+  
+
 
   for (let key in chore) {
     renderChores.push(
@@ -53,9 +49,13 @@ const Home = () => {
   }
 
   return (
+    <div>
+      <div>{today}</div>
+    
     <View style={styles.container}>
-      {createDate()}
       {renderChores}</View>)
+      </div>
+  )
 };
 
 export default Home;
