@@ -26,7 +26,7 @@ const Home = () => {
       <TouchableOpacity
         key={i}
         onPress={() => {
-          handlePress(key);
+          handlePress(c);
         }}
       >
         <Text style={c ? styles.done : styles.needToDo}>{c}</Text>
