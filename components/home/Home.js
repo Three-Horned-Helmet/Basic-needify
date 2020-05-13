@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import FireworksGif from "./fireworks/FireworksGif";
 import CheckBox from "react-native-check-box";
 
@@ -68,34 +75,58 @@ const Home = () => {
             handlePress(ele);
           }}
         >
-          <Text
-            style={[
-              chore[ele].state ? styles.done : styles.needToDo,
-              styles.choreText,
-            ]}
-          >
-            {ele}
-          </Text>
-          <CheckBox onClick={() => {}} isChecked={chore[ele].state} />
+          <View style={styles.choreContainer}>
+            <View>
+              <Image
+                style={styles.checkbox}
+                source={require("../../assets/checkbox/unchecked-checkbox.png")}
+              />
+              {chore[ele].state ? (
+                <Image
+                  style={styles.checkMark}
+                  source={require("../../assets/checkbox/delete-x.png")}
+                />
+              ) : (
+                <View></View>
+              )}
+            </View>
+            <Text
+              style={[
+                chore[ele].state ? styles.done : styles.needToDo,
+                styles.choreText,
+              ]}
+            >
+              {ele}
+            </Text>
+          </View>
         </TouchableOpacity>
       );
     });
 
   return (
-    <View style={styles.container}>
-      <Text>{today}</Text>
-      <View>{renderChores}</View>
-      <View>
-        <FireworksGif />
+    <ImageBackground
+      style={styles.backgroundImage}
+      source={require("../../assets/statusImages/1.png")}
+    >
+      <View style={styles.container}>
+        <Text>{today}</Text>
+        <View style={styles.mainChoreContainer}>{renderChores}</View>
+        <View>
+          <FireworksGif />
+        </View>
+        <Image style={styles.statusImage} source={statusImage.mood} />
       </View>
-      <Image style={styles.statusImage} source={statusImage.mood} />
-    </View>
+    </ImageBackground>
   );
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    width: "100%",
+    height: "100%",
+  },
   container: {
     backgroundColor: "#FFF",
     flex: 1,
@@ -109,14 +140,37 @@ const styles = StyleSheet.create({
     height: 100,
   },
   choreText: {
-    textAlign: "center",
     flexDirection: "column",
-    fontSize: 20,
+    fontSize: 26,
+    textAlignVertical: "center",
   },
   needToDo: {
     color: "red",
   },
   done: {
     color: "green",
+  },
+  checkbox: {
+    height: 30,
+    width: 30,
+    marginRight: 5,
+    marginTop: "auto",
+    marginBottom: "auto",
+  },
+  checkMark: {
+    height: 30,
+    width: 30,
+    position: "absolute",
+  },
+  choreContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: 15,
+  },
+  mainChoreContainer: {
+    marginRight: "auto",
+    marginLeft: "auto",
+    marginTop: "auto",
+    marginBottom: "auto",
   },
 });
