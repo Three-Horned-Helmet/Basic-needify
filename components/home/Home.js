@@ -104,19 +104,20 @@ const Home = () => {
     });
 
   return (
-    <ImageBackground
-      style={styles.backgroundImage}
-      source={require("../../assets/statusImages/1.png")}
-    >
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <ImageBackground
+        style={styles.backgroundImage}
+        source={require("../../assets/backgrounds/background-4.jpg")}
+      >
         <Text>{today}</Text>
+        <Text style={styles.header}>Basic Needify</Text>
         <View style={styles.mainChoreContainer}>{renderChores}</View>
         <View>
           <FireworksGif />
         </View>
-        <Image style={styles.statusImage} source={statusImage.mood} />
-      </View>
-    </ImageBackground>
+        {/* <Image style={styles.statusImage} source={statusImage.mood} /> */}
+      </ImageBackground>
+    </View>
   );
 };
 
@@ -130,7 +131,15 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
     flex: 1,
-    marginTop: 30,
+  },
+  header: {
+    fontSize: 30,
+    textAlign: "center",
+    marginBottom: 10,
+    marginTop: 40,
+    textDecorationLine: "underline",
+    color: "rgb(0, 0, 170)",
+    fontWeight: "bold",
   },
   statusImage: {
     position: "absolute",
@@ -141,7 +150,7 @@ const styles = StyleSheet.create({
   },
   choreText: {
     flexDirection: "column",
-    fontSize: 26,
+    fontSize: 23,
     textAlignVertical: "center",
   },
   needToDo: {
@@ -151,15 +160,15 @@ const styles = StyleSheet.create({
     color: "green",
   },
   checkbox: {
-    height: 30,
-    width: 30,
+    height: 25,
+    width: 25,
     marginRight: 5,
     marginTop: "auto",
     marginBottom: "auto",
   },
   checkMark: {
-    height: 30,
-    width: 30,
+    height: 25,
+    width: 25,
     position: "absolute",
   },
   choreContainer: {
@@ -170,7 +179,5 @@ const styles = StyleSheet.create({
   mainChoreContainer: {
     marginRight: "auto",
     marginLeft: "auto",
-    marginTop: "auto",
-    marginBottom: "auto",
   },
 });
