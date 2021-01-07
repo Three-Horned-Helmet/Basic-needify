@@ -1,48 +1,69 @@
-import React, { useState } from 'react';
-import { View, Image, TextInput, Button } from "react-native";
-
+import React, { useState } from "react";
+import { View, Image, Text, TextInput, Button } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Addtask = (props) => {
-    const [input, setInput] = useState({
-        value: ""
-    })
+  const [input, setInput] = useState({
+    value: "",
+  });
 
-    const handleInput = (newInputVal) => {
-        setInput({
-            value: newInputVal
-        })
-    }
+  const handleInput = (newInputVal) => {
+    setInput({
+      value: newInputVal,
+    });
+  };
 
-    const handleAddChore = () => {
-        setInput({
-            value: ""
-        })
-        props.addNewChore(input.value)
-    }
+  const handleAddChore = () => {
+    setInput({
+      value: "",
+    });
+    props.addNewChore(input.value);
+  };
 
-    return (
-        <View style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            marginTop: 15,
-        }}>
-            <TextInput 
-            placeholder={"Add another need"}
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-around",
+        borderBottomColor: "black",
+        borderBottomWidth: 2,
+        borderTopColor: "black",
+        borderTopWidth: 2,
+        width: "60%",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
+      <TextInput
+        placeholder={"Add another need"}
+        placeholderTextColor={"rgb(255, 255, 255)"}
+        style={{
+          backgroundColor: "transparent",
+          textAlign: "center",
+        }}
+        value={input.value}
+        onChangeText={(input) => handleInput(input)}
+      />
+      {input.value.length > 0 && (
+        <TouchableOpacity
+          style={{
+            marginTop: "auto",
+            marginBottom: "auto",
+          }}
+          onPress={() => handleAddChore()}
+        >
+          <Text
             style={{
-              backgroundColor: "white",
-              width: 170,
-              textAlign: "center",
+              fontWeight: "bold",
+              color: "rgb(255, 255, 0)",
             }}
-            value={input.value}
-            onChangeText={input => handleInput(input)}
-            />
-            <Button
-                title="Add"
-                color="rgb(0, 105, 155)"
-                onPress={() => handleAddChore()}
-            />
-        </View>
-    );
+          >
+            Add
+          </Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  );
 };
 
 export default Addtask;

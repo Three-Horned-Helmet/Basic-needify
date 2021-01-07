@@ -11,8 +11,8 @@ import {
 } from "react-native";
 import FireworksGif from "./fireworks/FireworksGif";
 import CheckBox from "react-native-check-box";
-import Addtask from "./add-task/Addtask"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import Addtask from "./add-task/Addtask";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Home = () => {
   const originalChores = {
@@ -25,7 +25,7 @@ const Home = () => {
     Food: { state: false, prio: 7 },
     "Clean clothes": { state: false, prio: 8 },
     Stretch: { state: false, prio: 9 },
-  }
+  };
 
   const [chore, setChore] = useState(originalChores);
   const [statusImage, setStatusImage] = useState({
@@ -34,26 +34,25 @@ const Home = () => {
 
   const mounting = async () => {
     try {
-      const allTasks = await AsyncStorage.getItem("tasks")
-      console.log("ALL TASKS ON MOUNT", allTasks)
-      if(allTasks){
+      const allTasks = await AsyncStorage.getItem("tasks");
+      console.log("ALL TASKS ON MOUNT", allTasks);
+      if (allTasks) {
         setChore({
-          ...JSON.parse(allTasks)
-        })
+          ...JSON.parse(allTasks),
+        });
       }
+    } catch (error) {
+      console.error(error);
     }
-    catch (error) {
-      console.error(error)
-    }
-  }
+  };
 
   useEffect(() => {
-    mounting()
-  }, [])
+    mounting();
+  }, []);
 
   const handlePress = async (key) => {
     changeStatusImage(chore[key].state);
-    const newState = !chore[key].state
+    const newState = !chore[key].state;
     setChore({
       ...chore,
       [key]: { ...chore[key], state: newState },
@@ -63,10 +62,10 @@ const Home = () => {
       const storedTasksObj = {
         ...chore,
         [key]: { ...chore[key], state: newState },
-      }
-      AsyncStorage.setItem("tasks" , JSON.stringify(storedTasksObj))
+      };
+      AsyncStorage.setItem("tasks", JSON.stringify(storedTasksObj));
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
   const changeStatusImage = (chore) => {
@@ -101,33 +100,35 @@ const Home = () => {
   const addNewChore = async (input) => {
     setChore({
       ...chore,
-      [input]: { state: false, prio: Object.keys(chore).length + 1 }
-    })
+      [input]: { state: false, prio: Object.keys(chore).length + 1 },
+    });
 
     try {
-      const storedTasks = await AsyncStorage.getItem("tasks")
-      if(storedTasks){
-        const storedTasksObj = {...JSON.parse(storedTasks), [input]: { state: false, prio: Object.keys(chore).length +1 }}
-        await AsyncStorage.setItem(
-          "tasks",
-          JSON.stringify(storedTasksObj)
-        )
+      const storedTasks = await AsyncStorage.getItem("tasks");
+      if (storedTasks) {
+        const storedTasksObj = {
+          ...JSON.parse(storedTasks),
+          [input]: { state: false, prio: Object.keys(chore).length + 1 },
+        };
+        await AsyncStorage.setItem("tasks", JSON.stringify(storedTasksObj));
       } else {
         await AsyncStorage.setItem(
           "tasks",
-          JSON.stringify({...chore, [input]: { state: false, prio: Object.keys(chore).length } })
-        )
+          JSON.stringify({
+            ...chore,
+            [input]: { state: false, prio: Object.keys(chore).length },
+          })
+        );
       }
+    } catch (error) {
+      console.error(error);
     }
-    catch (error) {
-      console.error(error)
-    }
-  }
+  };
 
   const clearChores = () => {
-    setChore(originalChores)
-    AsyncStorage.removeItem("tasks")
-  }
+    setChore(originalChores);
+    AsyncStorage.removeItem("tasks");
+  };
 
   let currentDate = new Date();
   let today = currentDate.toDateString();
@@ -177,17 +178,22 @@ const Home = () => {
         source={require("../../assets/backgrounds/background-1.jpg")}
       >
         <Text>{today}</Text>
+        <Image
+          style={styles.header}
+          source={require("../../assets/headers/basic-needify-header.png")}
+        />
         <Addtask addNewChore={addNewChore} />
-        <Text style={styles.header}>Basic Needify</Text>
-        <ScrollView style={styles.mainChoreContainer}>{renderChores}</ScrollView>
+        <ScrollView style={styles.mainChoreContainer}>
+          {renderChores}
+        </ScrollView>
         <View>
           <FireworksGif />
         </View>
         {/* <Image style={styles.statusImage} source={statusImage.mood} /> */}
-        <Button 
-        title="Clear Needs"
-        color="rgb(200, 80, 0)"
-        onPress={() => clearChores()}
+        <Button
+          title="Clear Needs"
+          color="rgba(180, 0, 0, 0.5)"
+          onPress={() => clearChores()}
         />
       </ImageBackground>
     </View>
@@ -206,13 +212,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    fontSize: 30,
-    textAlign: "center",
     marginBottom: 10,
-    marginTop: 20,
-    textDecorationLine: "underline",
-    color: "rgb(255, 255, 255)",
-    fontWeight: "bold",
+    marginTop: 30,
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: 330,
+    height: 80,
   },
   statusImage: {
     position: "absolute",
@@ -227,7 +232,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   needToDo: {
-    color: "white",
+    color: "black",
   },
   done: {
     color: "green",
@@ -252,9 +257,10 @@ const styles = StyleSheet.create({
   mainChoreContainer: {
     marginRight: "auto",
     marginLeft: "auto",
+    marginBottom: 30,
+    marginTop: 30,
     flex: 1,
     maxHeight: "70%",
     maxWidth: "80%",
-    marginBottom: 10
   },
 });
